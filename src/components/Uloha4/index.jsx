@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './carousel.css';
 
 /*
@@ -22,19 +23,35 @@ Bonus: Pozor na krajní hodnoty. Pokud dojdete na konec nebo začátek pole, tak
 */
 
 export const Uloha4 = () => {
+  const adresyObrazku = [
+    "/assets/WLUHO9A_xik.jpg", 
+    "/assets/DA1eGglMmlg.jpg", 
+    "/assets/kTxL6le0Wgk.jpg", 
+    "/assets/7go5UASxmDY.jpg", 
+    "/assets/YmATDIFsCmQ.jpg"
+  ]
+
+  const [obrazek, setObrazek] = useState(0)
+  const jePrvni = obrazek === 0
+  const jePosledni = obrazek === adresyObrazku.length - 1
+
   return (
     <div className="carousel">
-      <button className="carousel__predchozi" aria-label="předchozí">
+      <button className="carousel__predchozi" aria-label="předchozí" 
+        disabled={jePrvni}
+        onClick={() => setObrazek(obrazek - 1)}>
         ←
       </button>
       <div className="carousel__media">
         <img
           className="carousel__image"
-          src="https://source.unsplash.com/7go5UASxmDY/880x500"
+          src={adresyObrazku[obrazek]}
           alt=""
         />
       </div>
-      <button className="carousel__dalsi" aria-label="další">
+      <button className="carousel__dalsi" aria-label="další" 
+        disabled={jePosledni}
+        onClick={() => setObrazek(obrazek + 1)}>
         →
       </button>
     </div>

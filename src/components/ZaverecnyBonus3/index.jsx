@@ -11,9 +11,14 @@ Nápověda: Pokud je v `casVSekundach` nula, pak je 0:00:00. Pokud je v `casVSek
 export const ZaverecnyBonus3 = () => {
   const casVSekundach = useCasVSekundach()
 
+  const hodina = Math.floor((casVSekundach / 60 / 60) % 60).toString()
+  const minuta = Math.floor((casVSekundach / 60) % 60).toString().padStart(2, "0")
+  const vterina = Math.floor(casVSekundach % 60).toString().padStart(2, "0")
+
   return (
     <>
       Čas právě teď: <b>{casVSekundach}</b>
+      Čas právě teď: <b>{`${hodina}:${minuta}:${vterina}`}</b>
     </>
   )
 }
